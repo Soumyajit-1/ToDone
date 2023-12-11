@@ -1,14 +1,9 @@
-//
-//  HomeScreenTableViewController.swift
-//  ToDone
-//
-//  Created by Soumyajit Pal on 07/12/23.
-//
-
+import CoreData
 import UIKit
 
 class HomeScreenTableViewController: UITableViewController {
-    var itemArray = [item]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var itemArray = [Item]()
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("items.plist")
 
     override func viewDidLoad() {
@@ -19,6 +14,8 @@ class HomeScreenTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 35
         tableView.register(UINib(nibName: "HomeTVCell", bundle: nil), forCellReuseIdentifier: "HomeTVCell")
         
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
         // Loading itemArray From local Storage
         loadItems()
     }
@@ -27,24 +24,19 @@ class HomeScreenTableViewController: UITableViewController {
     // MARK: - Local Storage related operataion
     
     func loadItems(){
-        if let data = try? Data(contentsOf: dataFilePath!){
-            let decoder = PropertyListDecoder()
-            do{
-                itemArray = try decoder.decode([item].self, from: data)
-            }catch{
-                print("Something went wrong")
-            }
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do{
+            itemArray = try context.fetch(request)
+        }catch{
+            print("error fetching data from context \(error)")
         }
-        tableView.reloadData()
     }
     
     func refreshItems(){
-        let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(self.itemArray)
-            try data.write(to: self.dataFilePath!)
+            try context.save()
         }catch{
-            print("Somthing went wrong")
+            print("error saving context \(error)")
         }
         tableView.reloadData()
     }
@@ -62,10 +54,9 @@ class HomeScreenTableViewController: UITableViewController {
             alertTextField = textField
         })
         let action = UIAlertAction(title: "Add", style:.default, handler: {action in
-            // Access Core Data Context
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let newItem = Item(context: context)
+            let newItem = Item(context: self.context)
             newItem.itemLabel = alertTextField.text!
+            newItem.done = false
             self.itemArray.append(newItem)
             self.refreshItems()
         })
@@ -88,7 +79,7 @@ class HomeScreenTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath) as! HomeTVCell
         cell.HomeTVCellLabel.text = itemArray[indexPath.row].itemLabel
         
-        if itemArray[indexPath.row].isChecked{
+        if itemArray[indexPath.row].done{
             cell.accessoryType = .checkmark
         }else{
             cell.accessoryType = .none
@@ -99,13 +90,11 @@ class HomeScreenTableViewController: UITableViewController {
     // MARK: - Table View Deleagte Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if itemArray[indexPath.row].isChecked{
-            itemArray[indexPath.row].isChecked = false
-            refreshItems()
-        }else{
-            itemArray[indexPath.row].isChecked = true
-            refreshItems()
-        }
+//        context.delete(itemArray[indexPath.row])
+//        itemArray.remove(at: indexPath.row)
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        refreshItems()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

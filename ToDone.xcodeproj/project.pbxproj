@@ -15,7 +15,6 @@
 		3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */; };
 		3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88D2B2243C000937CDC /* HomeTVCell.swift */; };
 		3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3931D88E2B2243C000937CDC /* HomeTVCell.xib */; };
-		393CAF2D2B26121F005EC3BC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CAF2C2B26121F005EC3BC /* Item.swift */; };
 		93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 		3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewController.swift; sourceTree = "<group>"; };
 		3931D88D2B2243C000937CDC /* HomeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVCell.swift; sourceTree = "<group>"; };
 		3931D88E2B2243C000937CDC /* HomeTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTVCell.xib; sourceTree = "<group>"; };
-		393CAF2C2B26121F005EC3BC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTest.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,7 +94,6 @@
 		393CAF2F2B262817005EC3BC /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				393CAF2C2B26121F005EC3BC /* Item.swift */,
 				93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */,
 			);
 			path = "Data Models";
@@ -183,7 +180,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				393CAF2D2B26121F005EC3BC /* Item.swift in Sources */,
 				3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */,
 				3931D8772B223E3700937CDC /* AppDelegate.swift in Sources */,
 				3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */,

@@ -62,7 +62,10 @@ class HomeScreenTableViewController: UITableViewController {
             alertTextField = textField
         })
         let action = UIAlertAction(title: "Add", style:.default, handler: {action in
-            let newItem : item = item(itemLabel: alertTextField.text!, isChecked: false)
+            // Access Core Data Context
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let newItem = Item(context: context)
+            newItem.itemLabel = alertTextField.text!
             self.itemArray.append(newItem)
             self.refreshItems()
         })

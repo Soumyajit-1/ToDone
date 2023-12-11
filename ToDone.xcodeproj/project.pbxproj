@@ -16,6 +16,7 @@
 		3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88D2B2243C000937CDC /* HomeTVCell.swift */; };
 		3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3931D88E2B2243C000937CDC /* HomeTVCell.xib */; };
 		393CAF2D2B26121F005EC3BC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393CAF2C2B26121F005EC3BC /* Item.swift */; };
+		93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3931D88D2B2243C000937CDC /* HomeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVCell.swift; sourceTree = "<group>"; };
 		3931D88E2B2243C000937CDC /* HomeTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTVCell.xib; sourceTree = "<group>"; };
 		393CAF2C2B26121F005EC3BC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTest.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 			children = (
 				3931D8762B223E3700937CDC /* AppDelegate.swift */,
 				3931D8782B223E3700937CDC /* SceneDelegate.swift */,
-				393CAF2F2B262817005EC3BC /* Models */,
+				393CAF2F2B262817005EC3BC /* Data Models */,
 				393CAF302B262852005EC3BC /* Views */,
 				393CAF2E2B262803005EC3BC /* Controllers */,
 				3931D87F2B223E3800937CDC /* Assets.xcassets */,
@@ -91,12 +93,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		393CAF2F2B262817005EC3BC /* Models */ = {
+		393CAF2F2B262817005EC3BC /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
 				393CAF2C2B26121F005EC3BC /* Item.swift */,
+				93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */,
 			);
-			path = Models;
+			path = "Data Models";
 			sourceTree = "<group>";
 		};
 		393CAF302B262852005EC3BC /* Views */ = {
@@ -184,6 +187,7 @@
 				3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */,
 				3931D8772B223E3700937CDC /* AppDelegate.swift in Sources */,
 				3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */,
+				93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */,
 				3931D8792B223E3700937CDC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +411,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */,
+			);
+			currentVersion = 93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3931D86B2B223E3700937CDC /* Project object */;
 }

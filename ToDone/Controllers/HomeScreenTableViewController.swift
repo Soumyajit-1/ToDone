@@ -2,6 +2,8 @@ import CoreData
 import UIKit
 
 class HomeScreenTableViewController: UITableViewController {
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemArray = [Item]()
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("items.plist")
@@ -13,8 +15,9 @@ class HomeScreenTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 35
         tableView.register(UINib(nibName: "HomeTVCell", bundle: nil), forCellReuseIdentifier: "HomeTVCell")
-        
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+
+        //Search Bar Related
+        searchBar.delegate = self
         
         // Loading itemArray From local Storage
         loadItems()
@@ -23,13 +26,13 @@ class HomeScreenTableViewController: UITableViewController {
     
     // MARK: - Local Storage related operataion
     
-    func loadItems(){
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){
         do{
             itemArray = try context.fetch(request)
         }catch{
             print("error fetching data from context \(error)")
         }
+        tableView.reloadData()
     }
     
     func refreshItems(){
@@ -100,5 +103,26 @@ class HomeScreenTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+}
+
+extension HomeScreenTableViewController : UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "itemLabel CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors  = [NSSortDescriptor(key: "itemLabel", ascending: true)]
+        loadItems(with: request)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0{
+            loadItems()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+    }
+    
+    
     
 }

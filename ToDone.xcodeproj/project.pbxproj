@@ -15,6 +15,7 @@
 		3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */; };
 		3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88D2B2243C000937CDC /* HomeTVCell.swift */; };
 		3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3931D88E2B2243C000937CDC /* HomeTVCell.xib */; };
+		9307B0682B2894FF0046BA6A /* CatagoryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */; };
 		93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewController.swift; sourceTree = "<group>"; };
 		3931D88D2B2243C000937CDC /* HomeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVCell.swift; sourceTree = "<group>"; };
 		3931D88E2B2243C000937CDC /* HomeTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTVCell.xib; sourceTree = "<group>"; };
+		9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryListVC.swift; sourceTree = "<group>"; };
 		93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTest.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */,
+				9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */,
 				3931D8772B223E3700937CDC /* AppDelegate.swift in Sources */,
+				9307B0682B2894FF0046BA6A /* CatagoryListVC.swift in Sources */,
 				3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */,
 				93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */,
 				3931D8792B223E3700937CDC /* SceneDelegate.swift in Sources */,

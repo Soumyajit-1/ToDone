@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wSm-78-XfU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wSm-78-XfU">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ToDone-->
+        <!--Items-->
         <scene sceneID="PhX-IX-bkq">
             <objects>
                 <tableViewController storyboardIdentifier="HomeScreenTableViewController" id="qRJ-rl-PeN" customClass="HomeScreenTableViewController" customModule="ToDone" sceneMemberID="viewController">
@@ -25,8 +26,8 @@
                             <outlet property="delegate" destination="qRJ-rl-PeN" id="F1P-iB-UVK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDone" id="2pg-Ny-eVT">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="9H8-aH-ytc">
+                    <navigationItem key="navigationItem" title="Items" id="2pg-Ny-eVT">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="9H8-aH-ytc">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addBtnAcn:" destination="qRJ-rl-PeN" id="ouU-wQ-ZQ8"/>
@@ -49,6 +50,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lHw-BX-HEF">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemCyanColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -62,7 +67,7 @@
             </objects>
             <point key="canvasLocation" x="-57.251908396946561" y="-84.507042253521135"/>
         </scene>
-        <!--Catagory ListVC-->
+        <!--ToDone-->
         <scene sceneID="wK2-jb-Rgh">
             <objects>
                 <tableViewController storyboardIdentifier="CatagoryListVC" id="7dA-VK-j7Y" customClass="CatagoryListVC" customModule="ToDone" customModuleProvider="target" sceneMemberID="viewController">
@@ -70,22 +75,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="W0R-tV-FSr">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W0R-tV-FSr" id="PFA-6S-4JX">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="7dA-VK-j7Y" id="fcb-SB-c2A"/>
                             <outlet property="delegate" destination="7dA-VK-j7Y" id="797-Oh-XbT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="38R-oS-VRU"/>
+                    <navigationItem key="navigationItem" title="ToDone" id="38R-oS-VRU">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="eqQ-34-ozj">
+                            <connections>
+                                <action selector="addNewCatagory:" destination="7dA-VK-j7Y" id="BSW-5y-RFb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="qRJ-rl-PeN" kind="show" identifier="toItems" id="vSN-Uk-wPG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hn-u3-tbm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,8 +97,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemCyanColor">
+            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

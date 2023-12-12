@@ -6,8 +6,7 @@ class HomeScreenTableViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemArray = [Item]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("items.plist")
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,30 +21,6 @@ class HomeScreenTableViewController: UITableViewController {
         // Loading itemArray From local Storage
         loadItems()
     }
-    
-    
-    // MARK: - Local Storage related operataion
-    
-    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){
-        do{
-            itemArray = try context.fetch(request)
-        }catch{
-            print("error fetching data from context \(error)")
-        }
-        tableView.reloadData()
-    }
-    
-    func refreshItems(){
-        do{
-            try context.save()
-        }catch{
-            print("error saving context \(error)")
-        }
-        tableView.reloadData()
-    }
-    
-    
-    
     
     // MARK: - Button Actions
     
@@ -122,6 +97,29 @@ extension HomeScreenTableViewController : UISearchBarDelegate{
             }
         }
     }
+    
+    
+    // MARK: - Data Manupulation Methods
+    
+    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){
+        do{
+            itemArray = try context.fetch(request)
+        }catch{
+            print("error fetching data from context \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    func refreshItems(){
+        do{
+            try context.save()
+        }catch{
+            print("error saving context \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    
     
     
     

@@ -15,6 +15,7 @@
 		3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */; };
 		3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3931D88D2B2243C000937CDC /* HomeTVCell.swift */; };
 		3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3931D88E2B2243C000937CDC /* HomeTVCell.xib */; };
+		398E34172B2A348C0065032C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 398E34162B2A348C0065032C /* .gitignore */; };
 		9307B0682B2894FF0046BA6A /* CatagoryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */; };
 		93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */; };
 		F86712F45E4AA7EDA2CA0C8E /* Pods_ToDone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ACF255B4BFB4B92AD34F2E /* Pods_ToDone.framework */; };
@@ -32,6 +33,7 @@
 		3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewController.swift; sourceTree = "<group>"; };
 		3931D88D2B2243C000937CDC /* HomeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTVCell.swift; sourceTree = "<group>"; };
 		3931D88E2B2243C000937CDC /* HomeTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTVCell.xib; sourceTree = "<group>"; };
+		398E34162B2A348C0065032C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4605D18F2EBAB8B5155DA708 /* Pods-ToDone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDone.release.xcconfig"; path = "Target Support Files/Pods-ToDone/Pods-ToDone.release.xcconfig"; sourceTree = "<group>"; };
 		9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryListVC.swift; sourceTree = "<group>"; };
 		93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTest.xcdatamodel; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				3931D87F2B223E3800937CDC /* Assets.xcassets */,
 				3931D8812B223E3800937CDC /* LaunchScreen.storyboard */,
 				3931D8842B223E3800937CDC /* Info.plist */,
+				398E34162B2A348C0065032C /* .gitignore */,
 			);
 			path = ToDone;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398E34172B2A348C0065032C /* .gitignore in Resources */,
 				3931D8832B223E3800937CDC /* LaunchScreen.storyboard in Resources */,
 				3931D8802B223E3800937CDC /* Assets.xcassets in Resources */,
 				3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */,

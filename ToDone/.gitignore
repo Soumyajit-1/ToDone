@@ -1,0 +1,7 @@
+# Xcode
+ToDone.xcworkspace
+
+#Cocoapods
+Pods/
+Podfile.lock
+

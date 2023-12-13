@@ -1,6 +1,6 @@
 import UIKit
 import CoreData
-
+import SwipeCellKit 
 class CatagoryListVC : UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -9,10 +9,9 @@ class CatagoryListVC : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Table View Cell Related
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 35
+        tableView.rowHeight = 60
         tableView.register(UINib(nibName: "HomeTVCell", bundle: nil), forCellReuseIdentifier: "HomeTVCell")
-        // Loading itemArray From local Storage
+        // Loading itemArray From local Storage
         loadItems()
     }
     
@@ -34,7 +33,6 @@ class CatagoryListVC : UITableViewController {
         })
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
-        
     }
 
     // MARK: - Table view data source
@@ -48,21 +46,26 @@ class CatagoryListVC : UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath) as! HomeTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath ) as! HomeTVCell
+        cell.delegate = self
         cell.HomeTVCellLabel.text = categoryArray[indexPath.row].name
         return cell
     }
     
-    // MARK: - Table View Delegate
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+    //MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "toItems", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! HomeScreenTableViewController
+        if let indexPath = tableView.indexPathForSelectedRow{
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+            print(categoryArray[indexPath.row])
+        }
+    }
+        
     // MARK: - Data Manupulation Methods
     
     func refreshItems(){
@@ -83,5 +86,34 @@ class CatagoryListVC : UITableViewController {
         tableView.reloadData()
     }
     
+    func deleteItem(with indexPath : IndexPath){
+        self.context.delete(self.categoryArray[indexPath.row])
+        self.categoryArray.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
+    
+}
 
+// MARK: - Swipe Table View Cell Delegate Methods
+extension CatagoryListVC : SwipeTableViewCellDelegate{
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            print("ITEM DELETED")
+            self.deleteItem(with: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+
+        return [deleteAction]
+    }
+    
+//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+//        var options = SwipeOptions()
+//        options.expansionStyle = .destructive
+//        return options
+//    }
 }

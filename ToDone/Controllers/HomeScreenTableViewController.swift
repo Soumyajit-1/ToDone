@@ -1,25 +1,30 @@
 import CoreData
 import UIKit
+import SwipeCellKit
 
 class HomeScreenTableViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
-    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemArray = [Item]()
+    var selectedCategory : ItemsCategory?{
+        didSet{
+            loadItems()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Table View Cell Related
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 35
+        tableView.rowHeight = 60
         tableView.register(UINib(nibName: "HomeTVCell", bundle: nil), forCellReuseIdentifier: "HomeTVCell")
 
         //Search Bar Related
         searchBar.delegate = self
         
-        // Loading itemArray From local Storage
-        loadItems()
+        // Navigation Bar Title
+        navigationItem.title = selectedCategory?.name
+
     }
     
     // MARK: - Button Actions
@@ -35,6 +40,7 @@ class HomeScreenTableViewController: UITableViewController {
             let newItem = Item(context: self.context)
             newItem.itemLabel = alertTextField.text!
             newItem.done = false
+            newItem.parentCategory = self.selectedCategory
             self.itemArray.append(newItem)
             self.refreshItems()
         })
@@ -55,6 +61,7 @@ class HomeScreenTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath) as! HomeTVCell
+        cell.delegate = self
         cell.HomeTVCellLabel.text = itemArray[indexPath.row].itemLabel
         
         if itemArray[indexPath.row].done{
@@ -68,25 +75,19 @@ class HomeScreenTableViewController: UITableViewController {
     // MARK: - Table View Deleagte Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         refreshItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
 }
+
+// MARK: - UISearchBarDelegate Methods
 
 extension HomeScreenTableViewController : UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
-        request.predicate = NSPredicate(format: "itemLabel CONTAINS[cd] %@", searchBar.text!)
-        request.sortDescriptors  = [NSSortDescriptor(key: "itemLabel", ascending: true)]
-        loadItems(with: request)
+        let predicate = NSPredicate(format: "itemLabel CONTAINS[cd] %@", searchBar.text!)
+        loadItems(predicate: predicate)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -101,8 +102,11 @@ extension HomeScreenTableViewController : UISearchBarDelegate{
     
     // MARK: - Data Manupulation Methods
     
-    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()){
+    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest(),predicate : NSPredicate = NSPredicate(format: "TRUEPREDICATE")){
         do{
+            let andPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+            let compoundPredicate = NSCompoundPredicate(format: "\(andPredicate) && \(predicate)")
+            request.predicate = compoundPredicate
             itemArray = try context.fetch(request)
         }catch{
             print("error fetching data from context \(error)")
@@ -119,8 +123,28 @@ extension HomeScreenTableViewController : UISearchBarDelegate{
         tableView.reloadData()
     }
     
+    func deleteItem(with indexPath : IndexPath){
+        self.context.delete(self.itemArray[indexPath.row])
+        self.itemArray.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
     
-    
-    
-    
+}
+
+// MARK: - Swipe Table View Cell Delegate
+extension HomeScreenTableViewController : SwipeTableViewCellDelegate{
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            print("ITEM DELETED")
+            self.deleteItem(with: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+
+        return [deleteAction]
+    }
 }

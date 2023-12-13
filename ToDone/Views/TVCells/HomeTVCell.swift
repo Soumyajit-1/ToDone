@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import SwipeCellKit
+import CoreData
 
-class HomeTVCell: UITableViewCell {
-    
+class HomeTVCell: SwipeTableViewCell {
     @IBOutlet weak var HomeTVCellLabel: UILabel!
     
     override func awakeFromNib() {

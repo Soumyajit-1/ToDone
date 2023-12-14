@@ -17,6 +17,7 @@
 		3931D8902B2243C000937CDC /* HomeTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3931D88E2B2243C000937CDC /* HomeTVCell.xib */; };
 		398E34172B2A348C0065032C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 398E34162B2A348C0065032C /* .gitignore */; };
 		9307B0682B2894FF0046BA6A /* CatagoryListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */; };
+		931CA07C2B2B39F300C66F97 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931CA07B2B2B39F300C66F97 /* SwipeTableViewController.swift */; };
 		93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93F594BC2B2732A400DB956C /* DataModel.xcdatamodeld */; };
 		F86712F45E4AA7EDA2CA0C8E /* Pods_ToDone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18ACF255B4BFB4B92AD34F2E /* Pods_ToDone.framework */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		398E34162B2A348C0065032C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		4605D18F2EBAB8B5155DA708 /* Pods-ToDone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDone.release.xcconfig"; path = "Target Support Files/Pods-ToDone/Pods-ToDone.release.xcconfig"; sourceTree = "<group>"; };
 		9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryListVC.swift; sourceTree = "<group>"; };
+		931CA07B2B2B39F300C66F97 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		93F594BD2B2732A400DB956C /* CoreDataTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataTest.xcdatamodel; sourceTree = "<group>"; };
 		E24E7A0CDF940BD75F0EE5BF /* Pods-ToDone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDone.debug.xcconfig"; path = "Target Support Files/Pods-ToDone/Pods-ToDone.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,7 @@
 			children = (
 				3931D88A2B223F5900937CDC /* HomeScreenTableViewController.swift */,
 				9307B0672B2894FF0046BA6A /* CatagoryListVC.swift */,
+				931CA07B2B2B39F300C66F97 /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				3931D88B2B223F5900937CDC /* HomeScreenTableViewController.swift in Sources */,
 				3931D8772B223E3700937CDC /* AppDelegate.swift in Sources */,
 				9307B0682B2894FF0046BA6A /* CatagoryListVC.swift in Sources */,
+				931CA07C2B2B39F300C66F97 /* SwipeTableViewController.swift in Sources */,
 				3931D88F2B2243C000937CDC /* HomeTVCell.swift in Sources */,
 				93F594BE2B2732A400DB956C /* DataModel.xcdatamodeld in Sources */,
 				3931D8792B223E3700937CDC /* SceneDelegate.swift in Sources */,

@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
-import SwipeCellKit 
-class CatagoryListVC : UITableViewController {
+
+class CatagoryListVC : SwipeTableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var categoryArray = [ItemsCategory]()
@@ -36,23 +36,22 @@ class CatagoryListVC : UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath ) as! HomeTVCell
-        cell.delegate = self
+        let cell = super.tableView(tableView, cellForRowAt: indexPath) as! HomeTVCell
         cell.HomeTVCellLabel.text = categoryArray[indexPath.row].name
         return cell
     }
     
     //MARK: - Table View Delegate
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "toItems", sender: self)
@@ -64,6 +63,10 @@ class CatagoryListVC : UITableViewController {
             destinationVC.selectedCategory = categoryArray[indexPath.row]
             print(categoryArray[indexPath.row])
         }
+    }
+    
+    override func updateItems(at indexPath: IndexPath) {
+        deleteItem(with: indexPath)
     }
         
     // MARK: - Data Manupulation Methods
@@ -89,31 +92,14 @@ class CatagoryListVC : UITableViewController {
     func deleteItem(with indexPath : IndexPath){
         self.context.delete(self.categoryArray[indexPath.row])
         self.categoryArray.remove(at: indexPath.row)
-        tableView.reloadData()
+        do {
+             try context.save()
+         } catch {
+             print("Error saving context after deletion: \(error)")
+         }
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .fade) // Update the table view
+        tableView.endUpdates()
     }
     
-}
-
-// MARK: - Swipe Table View Cell Delegate Methods
-extension CatagoryListVC : SwipeTableViewCellDelegate{
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            // handle action by updating model with deletion
-            print("ITEM DELETED")
-            self.deleteItem(with: indexPath)
-        }
-
-        // customize the action appearance
-        deleteAction.image = UIImage(named: "delete-icon")
-
-        return [deleteAction]
-    }
-    
-//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
-//        var options = SwipeOptions()
-//        options.expansionStyle = .destructive
-//        return options
-//    }
 }

@@ -2,7 +2,7 @@ import CoreData
 import UIKit
 import SwipeCellKit
 
-class HomeScreenTableViewController: UITableViewController {
+class HomeScreenTableViewController: SwipeTableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemArray = [Item]()
@@ -60,8 +60,7 @@ class HomeScreenTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeTVCell", for: indexPath) as! HomeTVCell
-        cell.delegate = self
+        let cell = super.tableView(tableView, cellForRowAt: indexPath) as! HomeTVCell
         cell.HomeTVCellLabel.text = itemArray[indexPath.row].itemLabel
         
         if itemArray[indexPath.row].done{
@@ -78,6 +77,10 @@ class HomeScreenTableViewController: UITableViewController {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         refreshItems()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func updateItems(at indexPath: IndexPath) {
+        deleteItem(with: indexPath)
     }
     
 }
@@ -131,20 +134,3 @@ extension HomeScreenTableViewController : UISearchBarDelegate{
     
 }
 
-// MARK: - Swipe Table View Cell Delegate
-extension HomeScreenTableViewController : SwipeTableViewCellDelegate{
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            // handle action by updating model with deletion
-            print("ITEM DELETED")
-            self.deleteItem(with: indexPath)
-        }
-
-        // customize the action appearance
-        deleteAction.image = UIImage(named: "delete-icon")
-
-        return [deleteAction]
-    }
-}
